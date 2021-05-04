@@ -1,47 +1,55 @@
 #include "libft.h"
 
-static int	length_check(int n)
+static int	check_len(int n, int sign)
 {
 	int	len;
 
 	len = 0;
-	if (n < 0)
-		len++;
-	if (n == 0)
-		len = 1;
-	while (n)
+	while (n > 0)
 	{
+		n = n / 10;
 		len++;
+	}
+	if (len == 0)
+		return (1 + sign);
+	else
+		return (len + sign);
+}
+
+static char	*convert(int nlen, int sign, int n)
+{
+	char	*c;
+
+	c = (char *)malloc((sizeof(char) * nlen + 1));
+	if (!c)
+		return (NULL);
+	c[nlen] = '\0';
+	while (--nlen >= sign)
+	{
+		c[nlen] = n % 10 + 48;
 		n = n / 10;
 	}
-	return (len);
+	if (nlen >= 0)
+		c[nlen] = '-';
+	return (c);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	int		len;
+	int		nlen;
+	char	*a;
+	int		sign;
 
-	len = length_check(n);
-	str = malloc(len);
-	if (str == NULL)
-		return (NULL);
-	if (n == 0)
-		str[0] = '0';
+	nlen = 0;
+	sign = 0;
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	if (n < 0)
 	{
-		str[0] = '-';
-		if (n == -2147483648)
-		{
-			str[len-- - 1] = '8';
-			n = n / 10;
-		}
-		n = -n;
+		n = n * -1;
+		sign = 1;
 	}
-	while (n != 0 && len >= 0)
-	{
-		str[len-- - 1] = n % 10 + 48;
-		n = n / 10;
-	}
-	return (str);
+	nlen = check_len(n, sign);
+	a = convert(nlen, sign, n);
+	return (a);
 }

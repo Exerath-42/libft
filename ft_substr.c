@@ -1,38 +1,30 @@
 #include "libft.h"
 
-static char	*check_small(void)
-{
-	char	*string;
-
-	string = (char *)malloc(sizeof(char) * 1);
-	if (!string)
-		return (NULL);
-	string[0] = '\0';
-	return (string);
-}
-
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t			i;
-	size_t			size;
-	char			*string;
-	char			*dst;
+	size_t	i;
+	size_t	k;
+	char	*string;
 
 	i = 0;
-	dst = (char *)s;
-	if (!dst)
+	k = 0;	
+	if (!s)
 		return (NULL);
-	size = ft_strlen(dst);
-	if (size < start)
-		return (check_small());
-	string = (char *)malloc(sizeof(char) * (len + 1));
+	if(!s[i] || start > ft_strlen(s))
+		return(ft_strdup(""));
+	string = malloc(sizeof(char) * len + 1);
 	if (!string)
 		return (NULL);
-	while (i < len)
+	while (s[i])
 	{
-		string[i] = s[start + i];
+		if (i == start)
+		{
+			while (s[i] && k < len)
+				string[k++] = s[i++];
+			string[k] = '\0';
+			return (string);
+		}
 		i++;
 	}
-	string[i] = '\0';
-	return (string);
+	return (NULL);
 }

@@ -21,6 +21,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		end;
 	char	*trimmed;
 
+	if (!s1)
+		return (NULL);
 	i = 0;
 	start = 0;
 	while (s1[start] && isinset(s1[start], set))

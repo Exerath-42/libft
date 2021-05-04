@@ -2,11 +2,9 @@
 
 void	*ft_memchr (const void *s, int c, size_t n)
 {
-	size_t	i;
+	size_t			i;
 	unsigned char	*s1;
 
-	if (!s)
-		return (NULL);
 	s1 = (unsigned char *)s;
 	i = 0;
 	while (i < n)

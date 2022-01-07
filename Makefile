@@ -1,17 +1,17 @@
 NAME	=	libft.a
 
-HEADER	=	libft.h
+HEADER	=	includes/libft.h
 
-SRCS	=	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isascii.c \
-				ft_isdigit.c ft_isprint.c ft_strjoin.c ft_strlen.c ft_isalpha.c \
-				ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c \
-				ft_strlcpy.c ft_strlcat.c ft_memcpy.c ft_memset.c ft_memccpy.c \
-				ft_memmove.c ft_memchr.c ft_memcmp.c ft_strdup.c ft_strnstr.c \
-				ft_calloc.c ft_substr.c ft_strtrim.c ft_strmapi.c ft_putchar_fd.c\
-				ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_itoa.c ft_split.c
+SRCS	=	src/ft_atoi.c src/ft_bzero.c src/ft_isalnum.c src/ft_isascii.c \
+				src/ft_isdigit.c src/ft_isprint.c src/ft_strjoin.c src/ft_strlen.c src/ft_isalpha.c \
+				src/ft_toupper.c src/ft_tolower.c src/ft_strchr.c src/ft_strrchr.c src/ft_strncmp.c \
+				src/ft_strlcpy.c src/ft_strlcat.c src/ft_memcpy.c src/ft_memset.c src/ft_memccpy.c \
+				src/ft_memmove.c src/ft_memchr.c src/ft_memcmp.c src/ft_strdup.c src/ft_strnstr.c \
+				src/ft_calloc.c src/ft_substr.c src/ft_strtrim.c src/ft_strmapi.c src/ft_putchar_fd.c\
+				src/ft_putstr_fd.c src/ft_putendl_fd.c src/ft_putnbr_fd.c src/ft_itoa.c src/ft_split.c
 
-BSRCS		=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-				ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c
+BSRCS		=	src/ft_lstnew.c src/ft_lstadd_front.c src/ft_lstsize.c src/ft_lstlast.c \
+				src/ft_lstadd_back.c src/ft_lstdelone.c src/ft_lstclear.c src/ft_lstiter.c
 
 BOBJS		=	$(BSRCS:.c=.o)
 OBJS		=	$(SRCS:.c=.o)
@@ -24,7 +24,7 @@ $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
 bonus:	$(BOBJS) $(OBJS)
-	ar rc $(NAME) $(BOBJS) $(OBJS)
+	make OBJS="$(BOBJS)" all
 
 %.o:	%.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
